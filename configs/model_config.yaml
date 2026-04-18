@@ -1,0 +1,207 @@
+# Hyperparameter search spaces for Optuna
+# Each model's search space defines what Optuna will explore.
+# The key names match what the corresponding factory function accepts.
+
+models:
+  linear:
+    enabled: true
+    # No hyperparameters to tune — pure OLS
+
+  ridge:
+    enabled: true
+    search_space:
+      alpha:
+        type: float
+        low: 1.0e-3
+        high: 100.0
+        log: true
+
+  lasso:
+    enabled: true
+    search_space:
+      alpha:
+        type: float
+        low: 1.0e-4
+        high: 10.0
+        log: true
+
+  elasticnet:
+    enabled: true
+    search_space:
+      alpha:
+        type: float
+        low: 1.0e-4
+        high: 10.0
+        log: true
+      l1_ratio:
+        type: float
+        low: 0.05
+        high: 0.95
+        log: false
+
+  random_forest:
+    enabled: true
+    search_space:
+      n_estimators:
+        type: int
+        low: 50
+        high: 500
+      max_depth:
+        type: int
+        low: 3
+        high: 20
+      min_samples_split:
+        type: int
+        low: 2
+        high: 20
+      min_samples_leaf:
+        type: int
+        low: 1
+        high: 10
+      max_features:
+        type: categorical
+        choices: ["sqrt", "log2", 0.5, 0.7, 1.0]
+
+  xgboost:
+    enabled: true
+    search_space:
+      n_estimators:
+        type: int
+        low: 100
+        high: 1000
+      learning_rate:
+        type: float
+        low: 0.01
+        high: 0.3
+        log: true
+      max_depth:
+        type: int
+        low: 3
+        high: 10
+      subsample:
+        type: float
+        low: 0.6
+        high: 1.0
+      colsample_bytree:
+        type: float
+        low: 0.6
+        high: 1.0
+      reg_alpha:
+        type: float
+        low: 1.0e-8
+        high: 10.0
+        log: true
+      reg_lambda:
+        type: float
+        low: 1.0e-8
+        high: 10.0
+        log: true
+      min_child_weight:
+        type: int
+        low: 1
+        high: 10
+
+  # Bug fix #1 & #2: added missing model entries
+  lightgbm:
+    enabled: false
+    search_space:
+      n_estimators:
+        type: int
+        low: 100
+        high: 1000
+      learning_rate:
+        type: float
+        low: 0.01
+        high: 0.3
+        log: true
+      max_depth:
+        type: int
+        low: 3
+        high: 12
+      num_leaves:
+        type: int
+        low: 20
+        high: 150
+      subsample:
+        type: float
+        low: 0.6
+        high: 1.0
+      colsample_bytree:
+        type: float
+        low: 0.6
+        high: 1.0
+      reg_alpha:
+        type: float
+        low: 1.0e-8
+        high: 10.0
+        log: true
+      reg_lambda:
+        type: float
+        low: 1.0e-8
+        high: 10.0
+        log: true
+
+  catboost:
+    enabled: false
+    search_space:
+      iterations:
+        type: int
+        low: 100
+        high: 1000
+      learning_rate:
+        type: float
+        low: 0.01
+        high: 0.3
+        log: true
+      depth:
+        type: int
+        low: 3
+        high: 10
+      l2_leaf_reg:
+        type: float
+        low: 1.0
+        high: 10.0
+      subsample:
+        type: float
+        low: 0.6
+        high: 1.0
+
+  decision_tree:
+    enabled: false
+    search_space:
+      max_depth:
+        type: int
+        low: 2
+        high: 20
+      min_samples_split:
+        type: int
+        low: 2
+        high: 20
+      min_samples_leaf:
+        type: int
+        low: 1
+        high: 10
+
+  extra_trees:
+    enabled: false
+    search_space:
+      n_estimators:
+        type: int
+        low: 50
+        high: 500
+      max_depth:
+        type: int
+        low: 3
+        high: 20
+      min_samples_split:
+        type: int
+        low: 2
+        high: 20
+      min_samples_leaf:
+        type: int
+        low: 1
+        high: 10
+
+  dummy:
+    enabled: false
+    # No hyperparameters to tune

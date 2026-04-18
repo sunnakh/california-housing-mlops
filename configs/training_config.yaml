@@ -1,0 +1,26 @@
+experiment_name: regression_california_housing
+mlflow_tracking_uri: ./experiments/mlruns
+
+random_state: 42
+
+cross_validation:
+  cv_strategy: kfold
+  n_splits: 5
+  shuffle: true
+  scoring_metric: neg_root_mean_squared_error
+
+hyperparameter_tuning:
+  n_trials: 50
+  direction: minimize
+  metric: rmse
+  timeout_seconds: 300  # 5 minutes max per model tuning run
+  n_jobs: 1  # Optuna parallel jobs; keep 1 for reproducibility
+
+model_selection:
+  primary_metric: rmse
+  save_best_model: true
+  best_model_path: models/saved/best_model.joblib
+
+output:
+  figures_dir: experiments/figures
+  results_csv: experiments/results.csv

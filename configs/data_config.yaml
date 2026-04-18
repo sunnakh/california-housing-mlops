@@ -1,0 +1,41 @@
+dataset_name: california_housing
+source: sklearn.datasets.fetch_california_housing
+source_url: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_california_housing.html
+
+target_col: MedHouseVal
+
+feature_cols:
+  - MedInc
+  - HouseAge
+  - AveRooms
+  - AveBedrms
+  - Population
+  - AveOccup
+  - Latitude
+  - Longitude
+
+# Derived/engineered features added by build_features.py
+engineered_features:
+  - rooms_per_household
+  - bedrooms_per_room
+  - population_per_household
+
+# Log-transform these skewed features for linear models
+log_transform_cols:
+  - AveRooms
+  - Population
+  - AveOccup
+
+split:
+  test_size: 0.2
+  val_size: 0.1
+  random_state: 42
+
+# Validation
+expected_shape:
+  min_rows: 20000
+  n_cols: 9 # 8 features + 1 target
+
+target_range:
+  min: 0.15
+  max: 5.01 # 5.0 is the hard clip; allow tiny float tolerance

@@ -1,0 +1,29 @@
+# Deployment configuration for the California Housing regression model API.
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 1                     # Increase for multi-core serving in production
+  reload: false                  # Set true only in development
+  log_level: "info"
+
+model:
+  model_path: "models/saved/best_model.joblib"
+  preprocessor_path: "models/saved/preprocessor.joblib"
+  model_name: "california_housing_regressor"
+  model_version: "1.0.0"
+
+api:
+  title: "California Housing Price Predictor"
+  description: "REST API for predicting median house values in California census blocks."
+  version: "1.0.0"
+  docs_url: "/docs"
+  health_path: "/health"
+  predict_path: "/predict"
+  batch_predict_path: "/predict/batch"
+  max_batch_size: 1000           # Maximum samples per batch request
+
+monitoring:
+  log_predictions: true          # Log each prediction for monitoring
+  log_input_features: false      # Set true to log input values (PII risk — consider carefully)
+  slow_request_threshold_ms: 50  # Log a warning if prediction takes longer
