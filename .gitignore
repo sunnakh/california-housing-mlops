@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+.mypy_cache
+
+# Pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# MyPy
+.mypy_cache/
+
+# Logs
+logs/
+*.log
+
+# Trained model artefacts (too large for git)
+models/saved/*.joblib
+models/saved/*.pkl
+models/saved/*.bin
+
+# MLflow tracking data
+experiments/mlruns/
+
+# Generated figures
+experiments/figures/
+
+# Data (fetched on demand from sklearn)
+data/raw/
+data/processed/
+data/external/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Environment variables
+.env
+.env.*
+
+# Conda
+.conda/
+
+# CatBoost auto-generated training logs
+catboost_info/

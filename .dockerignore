@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+notebooks/
+
+# Data — mount at runtime, never bake into the image
+data/raw/
+data/processed/
+data/external/
+
+# Experiments & MLflow runs — mount as a volume
+experiments/mlruns/
+
+# Models — mount at runtime or train inside the container
+# (comment out the line below if you want to bake a pre-trained model in)
+models/saved/
+
+# Logs
+logs/
+
+# Dev tooling
+.git/
+.github/
+tests/
+*.md
+*.txt
+!requirements-serve.txt
+
+# Environment files
+.env
+.venv/
+env/
