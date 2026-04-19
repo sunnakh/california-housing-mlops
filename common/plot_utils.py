@@ -1,23 +1,22 @@
 from pathlib import Path
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Union
 
 from matplotlib import pyplot as plt
 import matplotlib
 import matplotlib.figure
 import seaborn as sns
 
-import pandas as pd
 import numpy as np
 
 
 import sys
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import learning_curve
 
 from common.logger import get_logger
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 logger = get_logger(__name__)
 
@@ -32,7 +31,7 @@ plt.rcParams.update(
 )
 
 
-def _save_or_show(fig: matplotlib.figure.Figure, output_path: Optional[str]) -> None:
+def _save_or_show(fig: matplotlib.figure.Figure, output_path: Optional[Union[str, Path]]) -> None:
     """Helper: save figure if output_path given, otherwise show it."""
 
     if output_path:
@@ -40,7 +39,8 @@ def _save_or_show(fig: matplotlib.figure.Figure, output_path: Optional[str]) -> 
         out.parent.mkdir(parents=True, exist_ok=True)
         fig.savefig(str(out), bbox_inches="tight")
         logger.info(f"Figure saved to {out}")
-    plt.show()
+    else:
+        plt.show()
     plt.close(fig)
 
 
@@ -48,7 +48,7 @@ def plot_feature_importance(
     model: Any,
     feature_names: List[str],
     top_n: int = 20,
-    output_path: Optional[str] = None,
+    output_path: Optional[Union[str, Path]] = None,
 ) -> None:
 
     if hasattr(model, "feature_importances_"):
@@ -81,7 +81,7 @@ def plot_learning_curve(
     y: np.ndarray,
     cv: int = 5,
     scoring: str = "neg_root_mean_squared_error",
-    output_path: Optional[str] = None,
+    output_path: Optional[Union[str, Path]] = None,
 ) -> None:
     """Plot train and validation scores as a function of training set size.
 
@@ -125,7 +125,7 @@ def plot_confusion_matrix(
     y_true: np.ndarray,
     y_pred: np.ndarray,
     labels: Optional[List[str]] = None,
-    output_path: Optional[str] = None,
+    output_path: Optional[Union[str, Path]] = None,
 ) -> None:
 
     cm = confusion_matrix(y_true=y_true, y_pred=y_pred)
@@ -135,8 +135,8 @@ def plot_confusion_matrix(
         annot=True,
         fmt="d",
         cmap="Blues",
-        xticklabels=labels if labels is not None else True,
-        yticklabels=labels if labels is not None else True,
+        xticklabels=labels if labels is not None else "auto",
+        yticklabels=labels if labels is not None else "auto",
         ax=ax,
     )
     ax.set_xlabel("Predicted label")
@@ -149,7 +149,7 @@ def plot_confusion_matrix(
 def plot_residuals(
     y_true: np.ndarray,
     y_pred: np.ndarray,
-    output_path: Optional[str] = None,
+    output_path: Optional[Union[str, Path]] = None,
 ) -> None:
 
     residuals = y_true - y_pred
@@ -171,3 +171,23 @@ def plot_residuals(
 
     fig.tight_layout()
     _save_or_show(fig, output_path)
+
+
+def actual_vs_predicted(
+    y_true: np.ndarray, y_pred: np.ndarray, output_path: Optional[Union[str, Path]] = None
+) -> None:
+    """Scatter plot of actual vs predicted values with a perfect-fit reference line."""
+    fig, ax = plt.subplots()
+    ax.scatter(y_true, y_pred, alpha=0.4, s=12, color="steelblue")
+
+    min_val = min(y_true.min(), y_pred.min())
+    max_val = max(y_true.max(), y_pred.max())
+    ax.plot([min_val, max_val], [min_val, max_val], color="red", linestyle="--", linewidth=1)
+
+    ax.set_xlabel("Actual values")
+    ax.set_ylabel("Predicted values")
+    ax.set_title("Actual vs Predicted")
+    fig.tight_layout()
+    _save_or_show(fig, output_path=output_path)
+
+
