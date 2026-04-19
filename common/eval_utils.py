@@ -2,7 +2,6 @@ from typing import Any, Dict, Literal
 
 import pandas as pd
 import numpy as np
-from pyparsing import col
 from sklearn.metrics import (
     accuracy_score,
     f1_score,
@@ -22,9 +21,8 @@ logger = get_logger(__name__)
 def regression_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, float]:
 
     rmse = float(np.sqrt(mean_squared_error(y_true=y_true, y_pred=y_pred)))
-    mae = float(np.sqrt(mean_absolute_error(y_true=y_true, y_pred=y_pred)))
-    r2 = float(np.sqrt(r2_score(y_true=y_true, y_pred=y_pred)))
-
+    mae = float(mean_absolute_error(y_true=y_true, y_pred=y_pred))
+    r2 = float(r2_score(y_true=y_true, y_pred=y_pred))
     # MAPE: guard against division by zero
     nonzero_mask = y_true != 0
     if nonzero_mask.sum() == 0:
@@ -34,16 +32,16 @@ def regression_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, floa
         mape = float(
             np.mean(np.abs((y_true[nonzero_mask] - y_pred[nonzero_mask]) / y_true[nonzero_mask]))
         )
-        metrics = {
-            "rmse": round(rmse, 6),
-            "mae": round(mae, 6),
-            "r2_score": round(r2, 6),
-            "mape": round(mape, 6),
-        }
+    metrics = {
+        "rmse": round(rmse, 6),
+        "mae": round(mae, 6),
+        "r2_score": round(r2, 6),
+        "mape": round(mape, 6),
+    }
 
-        logger.info(
-            f"Regression metrics: RMSE={rmse:.4f}, MAE={mae:.3f}, R2_score={r2:.3f}, MAPE={mape:.2f}"
-        )
+    logger.info(
+        f"Regression metrics: RMSE={rmse:.4f}, MAE={mae:.3f}, R2_score={r2:.3f}, MAPE={mape:.2f}"
+    )
 
     return metrics
 

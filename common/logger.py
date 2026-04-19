@@ -1,6 +1,5 @@
 import logging
 from logging.handlers import RotatingFileHandler
-from os import path
 from pathlib import Path
 
 
@@ -22,7 +21,7 @@ def get_logger(name: str, log_level: str = "INFO") -> logging.Logger:
     console_handler = logging.StreamHandler()
     console_handler.setLevel(numeric_level)
     console_handler.setFormatter(formatter)
-    console_handler.addHandler(console_handler)
+    logger.addHandler(console_handler)
 
     repo_root = Path(__file__).resolve().parent
     log_dir = repo_root / "logs"
