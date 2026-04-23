@@ -1,15 +1,10 @@
-from os import path
+import sys
 from pathlib import Path
 from typing import cast
 
 import pandas as pd
-import numpy as np
-
-import sys
-
 from sklearn.datasets import fetch_california_housing
 from sklearn.utils import Bunch
-
 
 # Allow imports from the repo root (shared utilities)
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
@@ -41,7 +36,7 @@ def load_california_housing(save_raw: bool = True) -> pd.DataFrame:
         logger.info(f"Loading cached raw data from {RAW_DATA_PATH} ...")
 
         df = pd.read_csv(RAW_DATA_PATH)
-        logger.info(f"Dataset loaded {df.shape[0]:, } rows * {df.shape[1]} columns.")
+        logger.info(f"Dataset loaded {df.shape[0]:,} rows * {df.shape[1]} columns.")
 
         return df
 
@@ -49,7 +44,7 @@ def load_california_housing(save_raw: bool = True) -> pd.DataFrame:
     dataset: Bunch = cast(Bunch, fetch_california_housing(as_frame=True))
 
     df = dataset.frame.copy()
-    df.columns = FEATURE_COLS + TARGET_COL
+    df.columns = FEATURE_COLS + [TARGET_COL]
 
     logger.info(
         f"Dataset loaded: {df.shape[0]:,} rows * {df.shape[1]} columns. "
@@ -68,7 +63,7 @@ def load_california_housing(save_raw: bool = True) -> pd.DataFrame:
 def validate_data(df: pd.DataFrame) -> None:
 
     # Column check
-    expected_columns = FEATURE_COLS + TARGET_COL
+    expected_columns = FEATURE_COLS + [TARGET_COL]
     missing_cols = [col for col in expected_columns if col not in df.columns]
     if missing_cols:
         raise ValueError(f"Missing required columns: {missing_cols}")
@@ -100,6 +95,6 @@ def validate_data(df: pd.DataFrame) -> None:
 
     logger.info(
         f"Data Validation passed. Shape= {df.shape}, "
-        f"target range= [{target_min:.3f}, {target_max}:.3f]"
+        f"target range= [{target_min:.3f}, {target_max:.3f}]"
         "nulls=0."
     )

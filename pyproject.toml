@@ -1,28 +1,47 @@
 [build-system]
-requires = ["setuptools>=65.0.0"]
+requires = ["setuptools>=68.0.0"]
 build-backend = "setuptools.backends.legacy:build"
 
 [project]
 name = "california-housing-mlops"
 version = "1.0.0"
-description = "California Housing price MLOPS pipeline"
+description = "California Housing price MLOps pipeline"
 requires-python = ">=3.10"
 
-[tool.black]
+# ── Ruff — linter + formatter (replaces flake8 + black + isort) ──────────────
+[tool.ruff]
 line-length = 100
-target-version = ["py310"]
+target-version = "py310"
 
-[tool.isort]
-profile = "black"
-line_length = 100
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B"]
+ignore = ["E203"]
 
+[tool.ruff.lint.isort]
+known-first-party = ["src", "common"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# ── Pyright — type checker (replaces mypy) ───────────────────────────────────
+[tool.pyright]
+pythonVersion = "3.10"
+typeCheckingMode = "standard"
+include = ["src", "common"]
+exclude = ["tests", "notebooks", "**/__pycache__"]
+
+# ── Pytest ────────────────────────────────────────────────────────────────────
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-v"
 asyncio_mode = "auto"
 
-[tool.mypy]
-python_version = "3.10"
-ignore_missing_imports = true
-warn_return_any = true
-warn_unused_configs = true
+# ── Coverage ──────────────────────────────────────────────────────────────────
+[tool.coverage.run]
+source = ["src"]
+omit = ["tests/*", "notebooks/*"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true

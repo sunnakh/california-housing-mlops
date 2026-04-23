@@ -75,9 +75,9 @@ def classification_metrics(
         except ValueError as e:
             logger.warning(f"Could not compute auc: {e}")
 
-        logger.info(
-            f"Classification Metrics - Accuracy={accuracy:.3f}, Precision={precision:.3f}, Recall={recall:.3f}, F1_score={f1:.3f}"
-        )
+    logger.info(
+        f"Classification Metrics - Accuracy={accuracy:.3f}, Precision={precision:.3f}, Recall={recall:.3f}, F1_score={f1:.3f}"
+    )
 
     return metrics
 
