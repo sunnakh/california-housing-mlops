@@ -68,3 +68,6 @@ data/external/
 
 # CatBoost auto-generated training logs
 catboost_info/
+
+CODE_STYLE.md
+ROADMAP.md
