@@ -1,10 +1,7 @@
-import sys
-from pathlib import Path
 
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from common.logger import get_logger
 
 logger = get_logger(__name__)
