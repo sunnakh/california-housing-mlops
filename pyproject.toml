@@ -1,12 +1,16 @@
 [build-system]
 requires = ["setuptools>=68.0.0"]
-build-backend = "setuptools.backends.legacy:build"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "california-housing-mlops"
 version = "1.0.0"
 description = "California Housing price MLOps pipeline"
 requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "common*"]
 
 # ── Ruff — linter + formatter (replaces flake8 + black + isort) ──────────────
 [tool.ruff]
