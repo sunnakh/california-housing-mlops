@@ -1,10 +1,9 @@
 from pathlib import Path
 from typing import Any
 
-from common.logger import get_logger
-
 import pandas as pd
-import numpy as np
+
+from common.logger import get_logger
 
 logger = get_logger(__name__)
 
