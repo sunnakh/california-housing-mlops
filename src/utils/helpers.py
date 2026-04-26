@@ -1,4 +1,3 @@
-import sys
 import time
 from collections.abc import Generator
 from contextlib import contextmanager
@@ -8,8 +7,6 @@ from typing import Any
 import joblib
 
 from common.logger import get_logger
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 logger = get_logger(__name__)
 
