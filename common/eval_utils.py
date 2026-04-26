@@ -1,7 +1,7 @@
-from typing import Any, Dict, Literal
+from typing import Any, Literal
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 from sklearn.metrics import (
     accuracy_score,
     f1_score,
@@ -18,7 +18,7 @@ from common.logger import get_logger
 logger = get_logger(__name__)
 
 
-def regression_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, float]:
+def regression_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> dict[str, float]:
 
     rmse = float(np.sqrt(mean_squared_error(y_true=y_true, y_pred=y_pred)))
     mae = float(mean_absolute_error(y_true=y_true, y_pred=y_pred))
@@ -35,7 +35,7 @@ def regression_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, floa
     metrics = {
         "rmse": round(rmse, 6),
         "mae": round(mae, 6),
-        "r2_score": round(r2, 6),
+        "r2": round(r2, 6),
         "mape": round(mape, 6),
     }
 
@@ -49,9 +49,9 @@ def regression_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, floa
 def classification_metrics(
     y_true: np.ndarray,
     y_pred: np.ndarray,
-    y_prob: np.ndarray,
+    y_prob: np.ndarray | None,
     average: Literal["micro", "macro", "samples", "weighted", "binary"] = "binary",
-) -> Dict[str]:
+) -> dict[str, float]:
 
     accuracy = float(accuracy_score(y_true=y_true, y_pred=y_pred))
     precision = float(precision_score(y_true=y_true, y_pred=y_pred))
@@ -76,13 +76,15 @@ def classification_metrics(
             logger.warning(f"Could not compute auc: {e}")
 
     logger.info(
-        f"Classification Metrics - Accuracy={accuracy:.3f}, Precision={precision:.3f}, Recall={recall:.3f}, F1_score={f1:.3f}"
+        "Classification Metrics - "
+        f"Accuracy={accuracy:.3f}, Precision={precision:.3f}, "
+        f"Recall={recall:.3f}, F1_score={f1:.3f}"
     )
 
     return metrics
 
 
-def build_comparison_table(results_dict: Dict[str, Dict[str, Any]]) -> pd.DataFrame:
+def build_comparison_table(results_dict: dict[str, dict[str, Any]]) -> pd.DataFrame:
 
     df = pd.DataFrame(results_dict).T
     df.index.name = "Model"
