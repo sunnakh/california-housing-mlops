@@ -1,8 +1,4 @@
-import sys
-from pathlib import Path
 from typing import Any
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from common.logger import get_logger
 from src.models.baseline import get_dummy_regressor, get_linear_regression
