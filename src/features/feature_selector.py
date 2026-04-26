@@ -1,12 +1,9 @@
-import sys
-from pathlib import Path
 from typing import cast
 
 import numpy as np
 import pandas as pd
 from sklearn.feature_selection import VarianceThreshold
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from common.logger import get_logger
 
 logger = get_logger(__name__)
