@@ -1,11 +1,11 @@
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.tree import DecisionTreeRegressor, ExtraTreeRegressor
+from sklearn.ensemble import ExtraTreesRegressor, RandomForestRegressor
+from sklearn.tree import DecisionTreeRegressor
 
 
 def get_decision_tree(**kwargs) -> DecisionTreeRegressor:
 
     defaults = {"random_state": 42}
-    defaults.update(kwargs=kwargs)
+    defaults.update(kwargs)
     return DecisionTreeRegressor(**defaults)
 
 
@@ -17,11 +17,11 @@ def get_random_forest(**kwargs) -> RandomForestRegressor:
         "n_jobs": -1,
     }
 
-    defaults.update(kwargs=kwargs)
+    defaults.update(kwargs)
     return RandomForestRegressor(**defaults)
 
 
-def get_extra_tree(**kwargs) -> ExtraTreeRegressor:
+def get_extra_tree(**kwargs) -> ExtraTreesRegressor:
 
     defaults = {
         "n_estimators": 100,
@@ -29,5 +29,5 @@ def get_extra_tree(**kwargs) -> ExtraTreeRegressor:
         "n_jobs": -1,
     }
 
-    defaults.update(kwargs=kwargs)
-    return ExtraTreeRegressor(**defaults)
+    defaults.update(kwargs)
+    return ExtraTreesRegressor(**defaults)
