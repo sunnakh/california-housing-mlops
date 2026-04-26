@@ -1,4 +1,3 @@
-import sys
 from pathlib import Path
 from typing import cast
 
@@ -7,7 +6,6 @@ from sklearn.datasets import fetch_california_housing
 from sklearn.utils import Bunch
 
 # Allow imports from the repo root (shared utilities)
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from common.logger import get_logger
 
 logger = get_logger(__name__)
