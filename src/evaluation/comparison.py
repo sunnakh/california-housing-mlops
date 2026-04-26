@@ -1,4 +1,3 @@
-import sys
 from pathlib import Path
 from typing import Any
 
@@ -6,8 +5,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from common.logger import get_logger
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 logger = get_logger(__name__)
 
@@ -85,12 +82,6 @@ class ModelComparison:
         Args:
             metric: Metric to visualize. Default 'rmse'.
             save_path: If provided, save figure to this path.
-
-        Example:
-            >>> comparison.plot_comparison(
-            ...     metric="rmse",
-            ...     save_path="experiments/figures/comparison.png",
-            ... )
         """
         df = self.to_dataframe()
 
