@@ -1,12 +1,8 @@
-import sys
-from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 import statsmodels.stats.diagnostic as smd
 from statsmodels.api import add_constant
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from common.logger import get_logger
 from common.plot_utils import _save_or_show
