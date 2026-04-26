@@ -1,9 +1,5 @@
-import sys
-from pathlib import Path
 
 import numpy as np
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from sklearn.model_selection import train_test_split
 
 from common.logger import get_logger
@@ -31,7 +27,7 @@ def train_val_test_split(
 
     val_fraction_of_remaining = val_size / (1 - test_size)
     x_train, x_val, y_train, y_val = train_test_split(
-        x, y, test_size=val_fraction_of_remaining, random_state=random_state
+        x_temp, y_temp, test_size=val_fraction_of_remaining, random_state=random_state
     )
 
     n_train, n_val, n_test = len(x_train), len(x_val), len(x_test)
