@@ -1,6 +1,6 @@
 import numpy as np
 
-from evaluation.metrics import compute_regression_metrics
+from src.evaluation.metrics import compute_regression_metrics
 
 
 class TestRegressionMetrics:
@@ -35,7 +35,7 @@ class TestRegressionMetrics:
 
         assert metrics["r2"] <= 1.0, f"R2 must be <= 1.0, got {metrics['r2']}"
 
-    def tetest_r2_is_one_for_perfect_predictions(self):
+    def test_r2_is_one_for_perfect_predictions(self):
         """R2 must be exactly 1.0 for perfect predictions."""
 
         y_true = np.linspace(1, 10, 50)
