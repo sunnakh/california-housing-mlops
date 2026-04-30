@@ -46,7 +46,7 @@ experiments/mlruns/
 experiments/figures/
 
 # Data (fetched on demand from sklearn)
-data/raw/
+# data/raw/
 data/processed/
 data/external/
 
