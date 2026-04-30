@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 
 from common.logger import get_logger
-from features.build_features import build_full_feature_pipeline
+from src.features.build_features import build_full_feature_pipeline
 from src.utils.helpers import load_model
 
 logger = get_logger(__name__)
