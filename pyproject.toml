@@ -9,6 +9,7 @@ description = "California Housing price MLOps pipeline"
 requires-python = ">=3.10"
 dependencies = [
     "mlflow>=3.11.1",
+    "optuna>=4.8.0",
 ]
 
 [tool.setuptools.packages.find]
