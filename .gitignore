@@ -70,4 +70,5 @@ data/external/
 catboost_info/
 
 CODE_STYLE.md
-ROADMAP.md
+ROADMAP.mdexperiments/
+mlruns/
