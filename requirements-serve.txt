@@ -1,0 +1,25 @@
+# Minimal dependencies for serving the FastAPI prediction API.
+# Do NOT add training/notebook/dev dependencies here.
+
+# Core scientific stack
+numpy>=1.26.0
+pandas>=2.1.0
+
+# Machine learning — needed for model inference
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+lightgbm>=4.3.0
+catboost>=1.2.2
+
+# Model serialisation
+joblib>=1.3.2
+
+# Configuration
+pyyaml>=6.0.1
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# Model serving
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+httpx>=0.26.0
