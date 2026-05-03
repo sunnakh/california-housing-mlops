@@ -32,5 +32,12 @@ jobs:
 
       - name: Run pytest
         run: python -m pytest --cov=src --cov-report=term-missing
+
+      - name: creating model placeholders for building
+        run: |
+          mkdir -p models/saved
+          touch models/saved/best_model.joblib
+          touch models/saved/preprocessor.joblib
+
       - name: Building Docker Image
         run: docker build -t house-prediction-api:ci .

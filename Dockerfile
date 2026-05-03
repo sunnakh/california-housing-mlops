@@ -44,7 +44,6 @@ RUN pip install --upgrade pip && \
 COPY common ./common
 COPY src ./src
 COPY configs ./configs
-COPY models ./models
 COPY pyproject.toml ./
 
 # Create a non-root user and drop privileges.
