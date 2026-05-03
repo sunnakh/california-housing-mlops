@@ -18,9 +18,8 @@ data/external/
 # Experiments & MLflow runs — mount as a volume
 experiments/mlruns/
 
-# Models — mount at runtime or train inside the container
-# (comment out the line below if you want to bake a pre-trained model in)
-models/saved/
+# Models — baked into the image for serving
+# models/saved/  ← intentionally included
 
 # Logs
 logs/
@@ -32,6 +31,10 @@ tests/
 *.md
 *.txt
 !requirements-serve.txt
+
+# Allow these files to be copied into the image
+!requirements.txt
+!README.md
 
 # Environment files
 .env
