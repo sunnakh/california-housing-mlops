@@ -1,7 +1,9 @@
-experiment_name: regression_california_housing
+experiment_name: regression_california_housing_mlops
 mlflow_tracking_uri: sqlite:///experiments/mlflow.db
 
 random_state: 42
+test_size: 0.2
+val_size: 0.1
 
 cross_validation:
   cv_strategy: kfold
