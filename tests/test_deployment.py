@@ -5,6 +5,8 @@ from unittest.mock import MagicMock, patch
 import numpy as np
 import pytest
 
+from src.deployment.model_server import ModelServer
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parents[4]))
 
@@ -88,8 +90,6 @@ class TestBatchRequest:
 
 
 # ── Unit tests for ModelServer ────────────────────────────────────────────────
-
-from src.deployment.model_server import ModelServer
 
 
 class TestModelServer:
