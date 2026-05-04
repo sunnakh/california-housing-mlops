@@ -73,3 +73,5 @@ CODE_STYLE.md
 ROADMAP.mdexperiments/
 mlruns/
 models/saved/*.joblib
+lwd
+experiments
