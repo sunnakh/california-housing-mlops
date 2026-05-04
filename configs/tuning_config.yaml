@@ -1,0 +1,11 @@
+# Optuna tuning controls.
+
+n_trials: 30
+timeout: 300
+direction: minimize
+metric: val_rmse
+
+models_to_tune:
+  - xgboost
+  - lightgbm
+  - random_forest
